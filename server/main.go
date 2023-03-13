@@ -116,7 +116,7 @@ func persistQuotation(q *Quotation) error {
 	}
 	defer stmt.Close()
 
-	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Millisecond)
+	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Nanosecond)
 	defer cancel()
 
 	_, err = stmt.ExecContext(ctx, uuid.NewString(), q.Usdbrl.Code, q.Usdbrl.Codein, q.Usdbrl.Bid, q.Usdbrl.CreateDate, time.Now())

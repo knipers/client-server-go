@@ -69,15 +69,16 @@ func GetNewDollarQuotation(writer http.ResponseWriter, request *http.Request) {
 		return
 	}
 
-	quotation, error := getExternalQuotation()
-	if error != nil {
+	quotation, err := getExternalQuotation()
+	if err != nil {
 		writer.WriteHeader(http.StatusInternalServerError)
 		return
 	}
 
-	error = persistQuotation(quotation)
-	if error != nil {
+	err = persistQuotation(quotation)
+	if err != nil {
 		writer.WriteHeader(http.StatusInternalServerError)
+		writer.Write([]byte(err.Error()))
 		return
 	}
 

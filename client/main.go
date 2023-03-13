@@ -27,6 +27,13 @@ func main() {
 
 	resp, err := http.DefaultClient.Do(req)
 	defer resp.Body.Close()
+	if err != nil {
+		panic(err)
+	}
+
+	if resp.StatusCode != 200 {
+		panic(resp.Status)
+	}
 
 	body, err := io.ReadAll(resp.Body)
 	if err != nil {
